@@ -199,7 +199,7 @@ form.addEventListener('submit', async (e) => {
 
   try {
     // Gửi dữ liệu đến Web App của Google Apps Script
-    const response = await fetch('https://script.google.com/macros/s/AKfycbzW3nsQ6FfUXQNheo_IkVgROzN_TEv8z1TCfhWAHUHqBMByexxGbN82iGtlqohvldqoSw/exec', {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbzUzg7js0Xzr_k1ZKrqxo98tFw3XjIY-OQdMgZ6kwVQYIxFvW4OL7U8dyISc5FBG5vmQw/exec', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
