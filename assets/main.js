@@ -177,3 +177,43 @@ themeButton.addEventListener("click", () => {
   localStorage.setItem("selected-theme", getCurrentTheme());
   localStorage.setItem("selected-icon", getCurrentIcon());
 });
+
+// gửi mail
+const form = document.querySelector('.contact__form');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  // Lấy dữ liệu từ các trường form
+  const name = document.querySelector('input[name="name"]').value;
+  const email = document.querySelector('input[name="email"]').value;
+  const message = document.querySelector('textarea[name="message"]').value;
+
+  // Định dạng dữ liệu gửi đi
+  const data = {
+    name: name,
+    email: email,
+    message: message
+  };
+
+  try {
+    // Gửi yêu cầu POST đến Google Apps Script Web App
+    const response = await fetch('https://script.google.com/macros/s/AKfycbzW3nsQ6FfUXQNheo_IkVgROzN_TEv8z1TCfhWAHUHqBMByexxGbN82iGtlqohvldqoSw/exec', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const result = await response.json();
+    if (result.result === 'success') {
+      alert('Tin nhắn của bạn đã được gửi thành công!');
+    } else {
+      alert('Có lỗi xảy ra, vui lòng thử lại.');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Không thể gửi tin nhắn, vui lòng kiểm tra kết nối.');
+  }
+});
