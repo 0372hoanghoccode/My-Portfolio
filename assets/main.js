@@ -179,44 +179,35 @@ themeButton.addEventListener("click", () => {
 });
 
 // gửi mail
-const form = document.getElementById('contactForm');
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // Ngăn chặn hành vi mặc định của form
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();  // Ngăn chặn form submit mặc định
-  alert('Form đã được gửi!'); // Thêm thông báo ở đây để kiểm tra
-
-  // Lấy dữ liệu từ form
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const message = document.getElementById('message').value;
-
-  // Tạo đối tượng dữ liệu
   const data = {
-    name: name,
-    email: email,
-    message: message
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    message: document.getElementById('message').value
   };
 
-  try {
-    // Gửi dữ liệu đến Web App của Google Apps Script
-    const response = await fetch('https://script.google.com/macros/s/AKfycbzUzg7js0Xzr_k1ZKrqxo98tFw3XjIY-OQdMgZ6kwVQYIxFvW4OL7U8dyISc5FBG5vmQw/exec', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-
-    const result = await response.json();
-    if (result.result === 'success') {
-      alert('Tin nhắn của bạn đã được gửi thành công!');
-      form.reset();  // Xóa dữ liệu sau khi gửi thành công
-    } else {
-      alert('Có lỗi xảy ra, vui lòng thử lại.');
+  fetch('https://script.google.com/macros/s/AKfycbyGpYNbjh_Xo8GNKCXLQweyu1KjEA85WG7rSfJIR-IuKNYcA5SS_nl2NP9Xx9LAO0TYgA/exec', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
     }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('Không thể gửi tin nhắn, vui lòng kiểm tra kết nối.');
-  }
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log(result); // Kiểm tra kết quả
+    if (result.result === "success") {
+      alert("Tin nhắn đã được gửi thành công!");
+    } else {
+      alert("Có lỗi xảy ra. Vui lòng thử lại.");
+    }
+  })
+  .catch(error => {
+    console.error('Lỗi:', error);
+    alert("Không thể gửi tin nhắn, vui lòng kiểm tra kết nối.");
+  });
 });
+
 
