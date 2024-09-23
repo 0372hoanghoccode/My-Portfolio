@@ -178,63 +178,51 @@ themeButton.addEventListener("click", () => {
   localStorage.setItem("selected-icon", getCurrentIcon());
 });
 
-// gửi mail
-// document.getElementById('contactForm').addEventListener('submit', function(event) {
-//   event.preventDefault(); // Ngăn chặn hành vi mặc định của form
-
-//   const data = {
-//     name: document.getElementById('name').value,
-//     email: document.getElementById('email').value,
-//     message: document.getElementById('message').value
-//   };
-
-//   fetch('https://script.google.com/macros/s/AKfycbxiudeGc0r2W1lw605i_0gMVgLezoFae2DwNZl301_M0JYenmZ5CooFVzCAXFga2tVAEw/exec', {
-//     method: 'POST',
-//     body: JSON.stringify(data),
-//     headers: {
-//       'Content-Type': 'application/json'
-//     }
-//   })
-//   .then(response => response.json())
-//   .then(result => {
-//     console.log(result); // Kiểm tra kết quả
-//     if (result.result === "success") {
-//       alert("Tin nhắn đã được gửi thành công!");
-//     } else {
-//       alert("Có lỗi xảy ra. Vui lòng thử lại.");
-//     }
-//   })
-//   .catch(error => {
-//     console.error('Lỗi:', error);
-//     alert("Không thể gửi tin nhắn, vui lòng kiểm tra kết nối.");
-//   });
-// });
-
 //dùng emailjs
-  (function() {
-    // Initialize EmailJS with your Public Key (User ID)
-    emailjs.init('GjHarngP0GnbmS5np'); // Thay bằng Public Key của bạn
-  })();
+(function() {
+  emailjs.init('GjHarngP0GnbmS5np'); 
+})();
 
-  document.getElementById('contactForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Ngăn form submit mặc định
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+  event.preventDefault();
 
-    // Lấy giá trị từ form
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
 
-    // Gửi email bằng EmailJS
-    emailjs.send('service_6au3nns', 'template_iq1tgjs', {
-      name: name,
-      email: email,
-      message: message
-    })
-    .then(function(response) {
-      console.log('Email gửi thành công!', response.status, response.text);
-      alert('Tin nhắn của bạn đã được gửi!');
-    }, function(error) {
-      console.error('Lỗi khi gửi email.', error);
-      alert('Có lỗi khi gửi tin nhắn. Vui lòng thử lại sau.');
-    });
+  if (!name || !email || !message) {
+    toast({ title: 'Thất bại', message: 'Vui lòng điền đầy đủ !', type: 'warning', duration: 2000 });
+    return;
+  }
+
+  const namePattern = /^[\p{L}\s]+$/u; 
+  if (!namePattern.test(name)) {
+    toast({ title: 'Thất bại', message: 'tên không hợp lệ !', type: 'warning', duration: 2000 });
+    return;
+  }
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    toast({ title: 'Thất bại', message: 'vui lòng nhập địa chỉ email !', type: 'warning', duration: 2000 });
+    return;
+  }
+
+  if (message.length < 1) {
+    toast({ title: 'Thất bại', message: 'hãy soạn tin nhắn để gửi !', type: 'warning', duration: 2000 });
+    return;
+  }
+
+  emailjs.send('service_6au3nns', 'template_iq1tgjs', {
+    name: name,
+    email: email,
+    message: message
+  })
+  .then(function(response) {
+    console.log('Email gửi thành công!', response.status, response.text);
+    toast({ title: 'Thành công', message: 'tin nhắn đã được gửi !', type: 'warning', duration: 2000 });
+    document.getElementById('contactForm').reset(); 
+  }, function(error) {
+    console.error('Lỗi khi gửi email.', error);
+    toast({ title: 'Thất bại', message: 'thất bại gửi tin nhắn không thành công !', type: 'warning', duration: 2000 });
   });
+});
