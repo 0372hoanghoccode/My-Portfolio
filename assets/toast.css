@@ -1,84 +1,98 @@
-/* Css toast message */
+/* CSS cho toast message */
 .toast {
     display: flex;
     align-items: center;
     background: #fff;
-    border-radius: 5px;
-    padding: 20px 0;
+    border-radius: 8px; /* Bo tròn nhiều hơn */
+    padding: 15px 20px; /* Giảm padding để thông báo gọn hơn */
     min-width: 400px;
     max-width: 450px;
-    border-left: 4px solid;
-    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid; /* Độ dày viền lớn hơn */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+    transition: transform 0.3s ease; /* Hiệu ứng chuyển động */
 }
 
-.toast + .toast{
-    margin-top: 20px;
+.toast + .toast {
+    margin-top: 15px; /* Khoảng cách giữa các thông báo */
 }
+
 #toast {
     position: fixed;
-    top: 50px;
-    left: 20px;
+    top: 30px;
+    right: 20px;
     z-index: 100;
 }
 
 .toast__private {
     display: flex;
+    width: 100%; /* Đảm bảo đầy đủ chiều rộng */
 }
 
 .toast__icon {
-    font-size: 24px;
+    font-size: 28px; /* Kích thước biểu tượng lớn hơn */
+    padding: 0 15px; /* Giảm padding cho biểu tượng */
 }
 
 .toast__close {
-    font-size: 20px;
-    color: rgba(0, 0, 0, 0.3);
+    font-size: 18px; /* Kích thước biểu tượng đóng lớn hơn */
+    color: rgba(0, 0, 0, 0.6); /* Màu sắc tối hơn cho biểu tượng đóng */
     cursor: pointer;
     position: absolute;
-    top: 1px;
-    right: 1px;
-}
-
-.toast__icon,
-.toast__close {
-    padding: 0 16px;
-    line-height: 52px;
+    top: 2px; /* Đưa xuống một chút để dễ nhìn */
+    right: 5px; /* Đưa sang phải một chút */
 }
 
 .toast__body {
-    flex-grow: 1;
+    flex-grow: 1; /* Để nội dung mở rộng */
+}
+
+.toast__title {
+    font-size: 16px; /* Kích thước chữ tiêu đề */
+    font-weight: 600; /* Chữ đậm cho tiêu đề */
+    margin: 0; /* Bỏ khoảng cách mặc định */
 }
 
 .toast__msg {
     font-size: 14px;
-    color: #888;
-    margin-top: 6px;
+    color: #666; /* Màu chữ nhẹ hơn */
+    margin-top: 4px; /* Khoảng cách giữa tiêu đề và thông điệp */
 }
 
 .toast--success {
-    border-color: #28a785;
+    border-color: #28a745; /* Màu viền cho thông báo thành công */
 }
 
 .toast--success .toast__icon {
-    color: #28a785;
+    color: #28a745; /* Màu biểu tượng cho thông báo thành công */
 }
 
 .toast--warning {
-    border-color: #ffc107;
+    border-color: #ffc107; /* Màu viền cho thông báo cảnh báo */
 }
 
 .toast--warning .toast__icon {
-    color: #ffc107;
+    color: #ffc107; /* Màu biểu tượng cho thông báo cảnh báo */
+}
+
+.toast--error {
+    border-color: #dc3545; /* Màu viền cho thông báo lỗi */
+}
+
+.toast--error .toast__icon {
+    color: #dc3545; /* Màu biểu tượng cho thông báo lỗi */
 }
 
 .toast__background {
     height: 4px;
     position: absolute;
     bottom: 0;
+    left: 0; /* Căn trái cho thanh nền */
+    border-radius: 0 0 8px 8px; /* Bo tròn dưới */
 }
 
-
-@media (max-width: 576px){
+@media (max-width: 576px) {
     .toast {
-       width: 300px;
+        width: 90%; /* Chiều rộng tự động trên màn hình nhỏ */
+        max-width: 300px; /* Giới hạn chiều rộng tối đa */
     }
 }
