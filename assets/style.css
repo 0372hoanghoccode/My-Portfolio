@@ -785,15 +785,16 @@ img {
   right: 1rem;
   bottom: -20%;
   background-color: var(--first-color);
-  opacity: 0.8;
+  opacity: 0.7;
   padding: 0 0.3rem;
-  border-radius: 50%;
+  border-radius: 20%;
   z-index: var(--z-tooltip);
   transition: 0.4s;
 }
 
 .scrollup:hover {
   background-color: var(--first-color-alt);
+  opacity: 1;
 }
 
 .scrollup__icon {
