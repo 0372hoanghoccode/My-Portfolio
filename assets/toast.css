@@ -92,8 +92,7 @@
 
 @media (max-width: 576px) {
     .toast {
-        width: 70%; 
-        max-width: 200px; 
+        max-width: 130px; 
         padding: 3px 5px;
     }
 
@@ -101,6 +100,29 @@
         position: fixed;
         top: 20px;
         right: 3px;
-        z-index: 100;
     }
+
+    .toast__icon {
+        font-size: 20px; 
+        padding: 0 7px; 
+    }
+
+    .toast__close {
+        font-size: 14px; 
+        position: absolute;
+        top: 1px; 
+        right: 3px; 
+    }
+    
+    .toast__title {
+        font-size: 14px; 
+        font-weight: 600; 
+        margin: 0; 
+    }
+    
+    .toast__msg {
+        font-size: 12px;
+        margin-top: 2px;
+    }
+    
 }
