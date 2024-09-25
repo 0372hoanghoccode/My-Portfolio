@@ -93,6 +93,13 @@
 @media (max-width: 576px) {
     .toast {
         width: 70%; 
-        max-width: 250px; 
+        max-width: 230px; 
+    }
+
+    #toast {
+        position: fixed;
+        top: 30px;
+        right: 3px;
+        z-index: 100;
     }
 }
