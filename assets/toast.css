@@ -86,13 +86,13 @@
     height: 4px;
     position: absolute;
     bottom: 0;
-    left: 0; /* Căn trái cho thanh nền */
-    border-radius: 0 0 8px 8px; /* Bo tròn dưới */
+    left: 0; 
+    border-radius: 0 0 8px 8px; 
 }
 
 @media (max-width: 576px) {
     .toast {
-        width: 90%; /* Chiều rộng tự động trên màn hình nhỏ */
-        max-width: 300px; /* Giới hạn chiều rộng tối đa */
+        width: 70%; 
+        max-width: 250px; 
     }
 }
